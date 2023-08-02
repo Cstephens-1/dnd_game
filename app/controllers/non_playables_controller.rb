@@ -1,0 +1,2 @@
+class NonPlayablesController < ApplicationController
+end
