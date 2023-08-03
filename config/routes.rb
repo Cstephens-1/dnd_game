@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
-  resources :savepoints
+
+
+  resources :non_playables
   resources :inventories
   resources :items
-  resources :non_playables
-  resources :characters do
-    resources :savepoints, only: [:index, :show, :create, :update]
-  end
+  resources :characters
   resources :users
-
-
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

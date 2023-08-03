@@ -8,7 +8,8 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.integer :constitution
       t.integer :dexterity
       t.integer :intelligence
-      t.references :user, null: false, foreign_key: true
+      t.integer :savepoint
+      t.belongs_to :user, null: false, foreign_key: true
 
       t.timestamps
     end

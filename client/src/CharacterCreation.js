@@ -43,52 +43,39 @@ function decreaseStat(setter, value){
 }
 
 
-function handleSubmit(e){
-    e.preventDefault()
+function handleSubmit(e) {
+    e.preventDefault();
     const newCharacter = {
-        name:characterName,
-        constitution:constitution,
-        defense:defense,
-        dexterity:dexterity,
-        health:health,
-        intelligence:intelligence,
-        strength:strength,
-        user_id: currentUser.id, 
-    }
-    fetch("http://localhost:3000/characters", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json",
-        },
-    body:JSON.stringify(newCharacter)})
-    .then(response=> response.json())
-    .then((createdCharacter)=>{
-        createSavepoint(createdCharacter.id)
-        navigate('/homepage')
-    })
-    
-}
-
-function createSavepoint(characterId) {
-    const newSavepoint = {
-      savepoint: 1,
-      character_id: characterId,
+      name: characterName,
+      constitution: constitution,
+      defense: defense,
+      dexterity: dexterity,
+      health: health,
+      intelligence: intelligence,
+      strength: strength,
+      savepoint:1,
+      user_id: currentUser.id,
     };
-    fetch("http://localhost:3000/savepoints", {
+    
+    fetch("http://localhost:3000/characters", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(newSavepoint),
+      body: JSON.stringify(newCharacter),
     })
       .then((response) => response.json())
-      .then((createdSavepoint) => {
-        console.log("Savepoint created:", createdSavepoint);
+      .then((createdCharacter) => {
+        console.log("Created character:", createdCharacter);
+        navigate('/homepage');
       })
       .catch((error) => {
-        console.error("Error creating savepoint:", error);
+        console.error("Error creating character", error);
       });
   }
+  
+
+  
 
     return(
         <>

@@ -16,25 +16,37 @@ function Menu({menuOpen}) {
         return pageNumber;
     }
 
-    function handleSave(){
-        const newSavepoint = getPageNumberFromURL()
-        console.log(newSavepoint, "new savepoint")
-        fetch(`http://localhost:3000/characters/${characterContext.id}/savepoints/1`, {
-            method: "PATCH",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ savepoint: newSavepoint }),
+    function handleSave() {
+        const newSavepoint = getPageNumberFromURL(); // Get the new savepoint value from the URL
+        console.log(characterContext.savepoint, ": pressed save. New savepoint:", newSavepoint);
+      
+        fetch(`http://localhost:3000/characters/${characterContext.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            savepoint: newSavepoint, // Update the savepoint property
+          }),
         })
-            .then((response) => response.json())
-            .then((data) => {
-            console.log("Savepoint updated:", data);
-            })
-            .catch((error) => {
-            console.error("Error updating savepoint:", error);
-            });
-        };
-
+          .then(response => {
+            if (response.ok) {
+              console.log("Savepoint updated successfully.");
+              
+              // Update the characterContext with the new savepoint
+              setCharacterContext(prevContext => ({
+                ...prevContext,
+                savepoint: newSavepoint,
+              }));
+            } else {
+              console.error("Failed to update savepoint.");
+            }
+          })
+          .catch(error => {
+            console.error("An error occurred:", error);
+          });
+      }
+      
     return (
         <>
             <div>

@@ -7,39 +7,14 @@ function CharacterCard({ eachCharacter }) {
   const navigate = useNavigate();
   const [characterContext, setCharacterContext] = useCharacterContext();
 
-  useEffect(() => {
-    fetchSavepoints();
-  }, []);
-
-  function fetchSavepoints() {
-    fetch(`http://localhost:3000/characters/${eachCharacter.id}/savepoints`, {
-      credentials: "include",
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error("Failed to fetch savepoints");
-        }
-        return resp.json();
-      })
-      .then((data) => {
-        setSavepoints(data);
-      })
-      .catch((error) => {
-        console.error("error fetching savepoints", error);
-      });
-  }
 
   function handlePlay() {
-    if (savepoints.length > 0) {
-      // If there's a savepoint, navigate to the existing savepoint
-      const existingSavepoint = savepoints[0].savepoint;
+      const existingSavepoint = eachCharacter.savepoint;
+      console.log(existingSavepoint, "existingsavepoint in play button")
       setCharacterContext(eachCharacter)
       navigate(`/page${existingSavepoint}`);
-    } else {
-      // If there are no savepoints, navigate to page1 (starting point)
-      navigate("/page1");
     }
-  }
+  
 
   useEffect(() => {
     console.log(characterContext, "charactercontext after play");
@@ -48,7 +23,7 @@ function CharacterCard({ eachCharacter }) {
   return (
     <>
       <li>{eachCharacter.name}</li>
-      <p>Savepoint: {savepoints.length > 0 ? savepoints[0].savepoint : 1}</p>
+      <p>Savepoint: {eachCharacter.savepoint}</p>
       <button onClick={handlePlay}>Play</button>
     </>
   );

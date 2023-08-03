@@ -2,22 +2,15 @@ import { useNavigate } from "react-router-dom";
 import Menu from "./components/Menu";
 import useMenu from "./components/useMenu";
 
-function Page2(){
-
+function Page3(){
     const [ menuOpen ] = useMenu();
-
-    const navigate = useNavigate()
-
-    function page3Clicked() {
-        navigate("/page3");
-      }
+    
     return(
         <>
-            <h1>test in page2</h1>
-            <button onClick={page3Clicked}>Page3</button>
+            <h1>test in page3</h1>
             <Menu menuOpen={menuOpen}/>
         </>
     )
 }
 
-export default Page2
+export default Page3
