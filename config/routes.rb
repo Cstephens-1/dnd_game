@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
 
-  resources :non_playables
+  resources :inventory_items
   resources :inventories
   resources :items
-  resources :characters
+  resources :non_playables
+  resources :characters do 
+    resource :inventory, only: [:show]
+  end
   resources :users
   get "/me", to: "users#show"
   post "/signup", to: "users#create"

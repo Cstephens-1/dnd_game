@@ -5,13 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Cory= User.create(first_name:"Cory", last_name:"Test", email:"test@test.com", password_digest:"test123")
+# seeds.rb
 
-Lader = Character.create(name:"Lader", health:10, defense:3, constitution:3, strength:5, dexterity:3, intelligence:4, user_id:Cory.id)
+# Create users
+# user1 = User.create(username: 'user1', password: 'password1')
+# user2 = User.create(username: 'user2', password: 'password2')
 
-Goblin = NonPlayable.create(name:"Goblin", enemy:true, health:10, constitution:5, defense:3, strength:7, dexterity:2, intelligence:1)
+# # Create characters for users
+# character1 = user1.characters.create(name: 'Character 1', health: 100, strength: 10)
+# character2 = user2.characters.create(name: 'Character 2', health: 80, defense: 8)
 
-Milk = Item.create(name:"Milk", description:"a sealed bottle of refreshing milk", consumable:true, ability:"restores 2 hp")
+# Create items
+item1 = Item.create(name: 'Sword', description: 'A sharp sword', ability: { strength: 5 })
+item2 = Item.create(name: 'Shield', description: 'A sturdy shield', ability: { defense: 3 })
 
-Inventory1 = Inventory.create(character_id:Lader.id, item_id:Milk.id)
+# # Create inventories for characters
+# character1_inventory = character1.create_inventory
+# character2_inventory = character2.create_inventory
+
+# # Associate items with inventories through InventoryItem
+# character1_inventory_item1 = character1_inventory.inventory_items.create(item: item1)
+# character1_inventory_item2 = character1_inventory.inventory_items.create(item: item2)
+# character2_inventory_item2 = character2_inventory.inventory_items.create(item: item2)
+
+puts "Seeds created successfully!"
+
 

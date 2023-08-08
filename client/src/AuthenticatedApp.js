@@ -9,6 +9,7 @@ import { useCallback, useEffect } from 'react';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
+import { InventoryProvider } from './contexts/InventoryContext';
 
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
@@ -37,6 +38,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       <nav>
         <NavBar handleLogout={handleLogout} currentUser={currentUser} />
       </nav>
+      <InventoryProvider>
       <Routes>
         <Route path="/" element={<UnauthenticatedApp />} />
         <Route path="/homepage" element={<Homepage currentUser={currentUser} />} />
@@ -45,6 +47,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Route path="/page2" element={<Page2 />} />
         <Route path="/page3" element={<Page3 />} />
       </Routes>
+      </InventoryProvider>
     </div>
   );
 }

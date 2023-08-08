@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.boolean :consumable
-      t.string :ability
+      t.text :ability
 
       t.timestamps
     end

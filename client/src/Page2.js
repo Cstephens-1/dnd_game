@@ -16,6 +16,7 @@ function Page2(){
             <h1>test in page2</h1>
             <button onClick={page3Clicked}>Page3</button>
             <Menu menuOpen={menuOpen}/>
+            <button>Add to Inventory</button>
         </>
     )
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_03_191932) do
+ActiveRecord::Schema.define(version: 2023_08_04_195649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,18 +32,25 @@ ActiveRecord::Schema.define(version: 2023_08_03_191932) do
 
   create_table "inventories", force: :cascade do |t|
     t.bigint "character_id", null: false
-    t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_inventories_on_character_id"
-    t.index ["item_id"], name: "index_inventories_on_item_id"
+  end
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.bigint "inventory_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["inventory_id"], name: "index_inventory_items_on_inventory_id"
+    t.index ["item_id"], name: "index_inventory_items_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.boolean "consumable"
-    t.string "ability"
+    t.text "ability"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -73,5 +80,6 @@ ActiveRecord::Schema.define(version: 2023_08_03_191932) do
 
   add_foreign_key "characters", "users"
   add_foreign_key "inventories", "characters"
-  add_foreign_key "inventories", "items"
+  add_foreign_key "inventory_items", "inventories"
+  add_foreign_key "inventory_items", "items"
 end

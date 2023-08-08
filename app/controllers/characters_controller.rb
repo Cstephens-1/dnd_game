@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
     skip_before_action :confirm_authentication
+    
 
     def index 
         characters = Character.all 
@@ -14,9 +15,10 @@ class CharactersController < ApplicationController
     def create 
         character = Character.new(character_params)
         if character.save
+            create_default_inventory(character)
             render json: character
         else
-            render json: {error: 'Failed to create character'}, status: unprocessable_entity
+            render json: {error: 'Failed to create character'}, status: :unprocessable_entity
         end
     end
 
@@ -36,7 +38,7 @@ class CharactersController < ApplicationController
         else
           render json: { error: 'Failed to update character savepoint' }, status: :unprocessable_entity
         end
-      end
+    end
 
 
 
@@ -45,5 +47,14 @@ class CharactersController < ApplicationController
     def character_params
         params.permit(:name, :health, :constitution, :defense, :dexterity, :strength, :intelligence, :savepoint, :user_id )
     end
+
+    def create_default_inventory(character)
+        inventory = Inventory.create(character_id: character.id)
+        item1 = Item.find_by(name: 'Sword')
+        item2 = Item.find_by(name: 'Shield')
+        inventory.inventory_items.create(item_id: item1.id)
+        inventory.inventory_items.create(item_id: item2.id)
+      end
+    
 
 end

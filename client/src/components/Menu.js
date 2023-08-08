@@ -1,3 +1,4 @@
+import Inventory from "../Inventory";
 import { useCharacterContext } from "../contexts/CharacterContext";
 import useMenu from "./useMenu";
 
@@ -52,8 +53,8 @@ function Menu({menuOpen}) {
             <div>
             <h2>Menu is opened</h2>
             <h1>{characterContext.name}</h1>
+                <Inventory />
             <ul>
-                <li>Inventory</li>
                 <li>Persona</li>
                 <li><button onClick={handleSave}>Save</button></li>
             </ul>

@@ -53,10 +53,10 @@ function handleSubmit(e) {
       health: health,
       intelligence: intelligence,
       strength: strength,
-      savepoint:1,
+      savepoint: 1,
       user_id: currentUser.id,
     };
-    
+  
     fetch("http://localhost:3000/characters", {
       method: "POST",
       headers: {
@@ -73,6 +73,7 @@ function handleSubmit(e) {
         console.error("Error creating character", error);
       });
   }
+  
   
 
   
