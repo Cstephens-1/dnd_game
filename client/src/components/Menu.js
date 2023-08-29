@@ -3,9 +3,10 @@ import { useCharacterContext } from "../contexts/CharacterContext";
 import useMenu from "./useMenu";
 
 
-function Menu({menuOpen}) {
+function Menu() {
 
     const [characterContext, setCharacterContext] = useCharacterContext()
+    const [menuOpen] = useMenu()
 
     if (!menuOpen) {
     return null;
@@ -53,7 +54,7 @@ function Menu({menuOpen}) {
             <div>
             <h2>Menu is opened</h2>
             <h1>{characterContext.name}</h1>
-                <Inventory />
+                <Inventory menuOpen = {menuOpen} />
             <ul>
                 <li>Persona</li>
                 <li><button onClick={handleSave}>Save</button></li>

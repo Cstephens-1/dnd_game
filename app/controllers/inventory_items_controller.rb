@@ -6,7 +6,7 @@ class InventoryItemsController < ApplicationController
     end
 
     def create 
-        inventory_item = inventory_item.new(inventory_item_params)
+        inventory_item = InventoryItem.new(inventory_items_params)
         if inventory_item.save 
             render json: inventory_item, include: :item, status: :created
         else
@@ -32,6 +32,6 @@ class InventoryItemsController < ApplicationController
       private
 
     def inventory_items_params
-        params.require(:inventory_item).permit(:inventory_id, :item_id)
+        params.permit(:character_id, :inventory_id, :item_id)
     end
 end

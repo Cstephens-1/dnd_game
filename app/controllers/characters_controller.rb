@@ -25,7 +25,11 @@ class CharactersController < ApplicationController
     def show 
         character = Character.find_by_id(params[:id])
         if character
-            render json: character 
+            inventory = character.inventory
+            render json: {
+                character:character,
+                inventory_id: inventory.id
+            }
         else
             render json: {error: 'Character not found'}, status: :not_found
         end
