@@ -36,7 +36,7 @@ function Inventory({character, menuOpen}) {
         menuOpen && Array.isArray(inventoryContext) && inventoryContext.map(item => (
           <div>
             <li>{item.id}</li>
-            <li>{item.item.name}</li>
+            {item.item && <li>{item.item.name}</li>}
             <button onClick={()=>handleDelete(item.id)}>Delete Item</button>
           </div>
         ))
