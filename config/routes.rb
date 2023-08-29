@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :non_playables
   resources :characters do 
     resource :inventory, only: [:show]
+    post 'add_item/:item_id', to: 'inventories#add_item', as: :add_item
+
   end
   resources :users
   get "/me", to: "users#show"

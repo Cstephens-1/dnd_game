@@ -52,8 +52,8 @@ class CharactersController < ApplicationController
         inventory = Inventory.create(character_id: character.id)
         item1 = Item.find_by(name: 'Sword')
         item2 = Item.find_by(name: 'Shield')
-        inventory.inventory_items.create(item_id: item1.id)
-        inventory.inventory_items.create(item_id: item2.id)
+        inventory.inventory_items.create(item: item1)
+        inventory.inventory_items.create(item: item2)
       end
     
 

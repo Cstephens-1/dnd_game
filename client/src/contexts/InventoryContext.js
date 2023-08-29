@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export const InventoryContext = createContext({});
+export const InventoryContext = createContext([]);
 export const useInventoryContext = () => useContext(InventoryContext);
 
 export const InventoryProvider = ({ children }) => {
@@ -8,7 +8,7 @@ export const InventoryProvider = ({ children }) => {
   const [inventoryContext, setInventoryContext] = useState(
     inventoryContextLocalStorage && inventoryContextLocalStorage !== "undefined"
       ? JSON.parse(inventoryContextLocalStorage)
-      : {}
+      : []
   );
 
   useEffect(() => {

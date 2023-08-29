@@ -8,13 +8,30 @@ class InventoryItemsController < ApplicationController
     def create 
         inventory_item = inventory_item.new(inventory_item_params)
         if inventory_item.save 
-            render json: inventory_item
+            render json: inventory_item, include: :item, status: :created
         else
             render json: {error: "Could not create inventory Item"}, status: :unprocessable_entity
         end
     end
 
+    def show
+        inventory_item = InventoryItem.find(params[:id])
+        render json: inventory_item
+    end
+
+    def destroy
+        inventory_item = InventoryItem.find(params[:id])
+    
+        if inventory_item.destroy
+          render json: { message: 'Item successfully deleted' }, status: :ok
+        else
+          render json: { error: 'Failed to delete item' }, status: :unprocessable_entity
+        end
+      end
+
+      private
+
     def inventory_items_params
-        params.permit(:inventory_id, :item_id)
+        params.require(:inventory_item).permit(:inventory_id, :item_id)
     end
 end
