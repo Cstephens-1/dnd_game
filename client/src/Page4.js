@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNonPlayerContext } from "./contexts/NonPlayerContext";
 import { useNavigate } from "react-router-dom";
 import NPCCard from "./NPCCard";
+import useMenu from "./components/useMenu";
+import Menu from "./components/Menu";
 
 function Page4() {
   const [nonPlayerContext] = useNonPlayerContext(); // Use the context
   const navigate = useNavigate();
+  const [ menuOpen ] = useMenu();
 
   // Local state to store fetched NPCs
   const [fetchedNPCs, setFetchedNPCs] = useState([]);
@@ -27,6 +30,7 @@ function Page4() {
       {fetchedNPCs.map(npc => (
         <div key={npc.id}>
           <NPCCard npc={npc}/>
+          <Menu menuOpen={menuOpen}/>
         </div>
       ))}
     </div>
