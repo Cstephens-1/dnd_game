@@ -3,7 +3,7 @@ import { useCharacterContext } from './contexts/CharacterContext';
 import { useInventoryContext } from './contexts/InventoryContext';
 import { useInventory } from './useInventory';
 
-function Inventory({character, menuOpen}) {
+function Inventory({menuOpen}) {
     const [inventoryContext, setInventoryContext] = useInventoryContext()
     const [characterContext, setCharacterContext] = useCharacterContext()
     const [loading, setLoading] = useState(true);
@@ -34,8 +34,8 @@ function Inventory({character, menuOpen}) {
         <p>Loading Inventory...</p>
       ) : (
         menuOpen && Array.isArray(inventoryContext) && inventoryContext.map(item => (
-          <div>
-            <li>{item.id}</li>
+          <div key={item.id}>
+            {item.id}
             {item.item && <li>{item.item.name}</li>}
             <button onClick={()=>handleDelete(item.id)}>Delete Item</button>
           </div>

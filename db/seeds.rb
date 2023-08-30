@@ -19,6 +19,8 @@
 item1 = Item.create(name: 'Sword', description: 'A sharp sword', ability: { strength: 5 })
 item2 = Item.create(name: 'Shield', description: 'A sturdy shield', ability: { defense: 3 })
 
+goblin = NonPlayable.create(name:"Goblin", health:10, strength:7, constitution:4, dexterity:2, intelligence:1, defense: 4, enemy:true)
+
 # # Create inventories for characters
 # character1_inventory = character1.create_inventory
 # character2_inventory = character2.create_inventory
@@ -27,6 +29,19 @@ item2 = Item.create(name: 'Shield', description: 'A sturdy shield', ability: { d
 # character1_inventory_item1 = character1_inventory.inventory_items.create(item: item1)
 # character1_inventory_item2 = character1_inventory.inventory_items.create(item: item2)
 # character2_inventory_item2 = character2_inventory.inventory_items.create(item: item2)
+# create_table "non_playables", force: :cascade do |t|
+#     t.string "name"
+#     t.integer "health"
+#     t.integer "strength"
+#     t.integer "constitution"
+#     t.integer "dexterity"
+#     t.integer "intelligence"
+#     t.integer "defense"
+#     t.boolean "enemy"
+#     t.datetime "created_at", precision: 6, null: false
+#     t.datetime "updated_at", precision: 6, null: false
+#   end
+
 
 puts "Seeds created successfully!"
 

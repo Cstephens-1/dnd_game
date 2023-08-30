@@ -21,7 +21,7 @@ function Page2(){
       }
 
       function handleAddItem(){
-        addNewItem(characterContext.id, 2)
+        addNewItem(characterContext.id, 3)
       }
 
     return(

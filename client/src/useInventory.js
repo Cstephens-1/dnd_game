@@ -5,10 +5,12 @@ export const useInventory = () =>{
     const [error, setError] = useState(null)
     const [inventoryContext, setInventoryContext] = useInventoryContext()
 
-    const addNewItem = async (characterId, itemId) => {
+    const addNewItem = async (inventoryId, itemId) => {
         const newItemData = {
-            inventory_id: characterId,
-            item_id: itemId
+            "inventory_item":{
+            "inventory_id": inventoryId,
+            "item_id": itemId
+            }
         };
         try {
             const response = await fetch('http://127.0.0.1:3000/inventory_items', {

@@ -10,6 +10,8 @@ import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
 import { InventoryProvider } from './contexts/InventoryContext';
+import { NonPlayerProvider } from './contexts/NonPlayerContext';
+import Page4 from './Page4';
 
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
@@ -39,14 +41,17 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <NavBar handleLogout={handleLogout} currentUser={currentUser} />
       </nav>
       <InventoryProvider>
-      <Routes>
-        <Route path="/" element={<UnauthenticatedApp />} />
-        <Route path="/homepage" element={<Homepage currentUser={currentUser} />} />
-        <Route path="/createcharacter" element={<CharacterCreation currentUser={currentUser} />} />
-        <Route path="/page1" element={<Page1 />} />
-        <Route path="/page2" element={<Page2 />} />
-        <Route path="/page3" element={<Page3 />} />
-      </Routes>
+        <NonPlayerProvider>
+        <Routes>
+            <Route path="/" element={<UnauthenticatedApp />} />
+            <Route path="/homepage" element={<Homepage currentUser={currentUser} />} />
+            <Route path="/createcharacter" element={<CharacterCreation currentUser={currentUser} />} />
+            <Route path="/page1" element={<Page1 />} />
+            <Route path="/page2" element={<Page2 />} />
+            <Route path="/page3" element={<Page3 />} />
+            <Route path="/page4" element={<Page4 />} />
+          </Routes>
+        </NonPlayerProvider>
       </InventoryProvider>
     </div>
   );
