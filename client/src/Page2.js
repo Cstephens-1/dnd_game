@@ -4,6 +4,7 @@ import useMenu from "./components/useMenu";
 import { InventoryContext, useInventoryContext } from "./contexts/InventoryContext";
 import { useCharacterContext } from "./contexts/CharacterContext";
 import {useInventory} from "./useInventory"
+import { useEffect, useState } from "react";
 
 function Page2(){
     const {addNewItem, error} = useInventory()
@@ -11,6 +12,16 @@ function Page2(){
     const [ menuOpen ] = useMenu();
     const [inventoryContext, setInventoryContext] = useInventoryContext()
     const [characterContext, setCharacterContext] = useCharacterContext()
+    const [availableItems, setAvailableItems] = useState([])
+
+    useEffect(()=>{
+        fetch("http://127.0.0.1:3000/items?name=Sword")
+        .then(resp=>resp.json())
+        .then(item=>{
+            console.log(item)
+            setAvailableItems(item)
+        })
+    }, [])
 
     const navigate = useNavigate()
 
@@ -21,7 +32,12 @@ function Page2(){
       }
 
       function handleAddItem(){
-        addNewItem(characterContext.id, 3)
+        let sword = availableItems.find(item=> item.name==="Sword")
+        if(sword){
+
+            console.log(sword)
+            addNewItem(characterContext.id, sword.id)
+        }
       }
 
     return(
