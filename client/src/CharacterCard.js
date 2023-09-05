@@ -1,25 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useCharacterContext } from "./contexts/CharacterContext";
+import { useNonPlayerContext } from "./contexts/NonPlayerContext";
 
 function CharacterCard({ eachCharacter }) {
   const [savepoints, setSavepoints] = useState([]);
   const navigate = useNavigate();
   const [characterContext, setCharacterContext] = useCharacterContext();
+  const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext()
+  const goblin = nonPlayerContext.filter((npc)=>npc.name==="Goblin" || npc.name === "goblin")
 
+  if(goblin){
+    nonPlayerContext.currentEnemy = goblin
+  }else{
+    setNonPlayerContext([...nonPlayerContext, goblin])
+  }
 
-  function handlePlay() {
-      const existingSavepoint = eachCharacter.savepoint;
-      console.log(existingSavepoint, "existingsavepoint in play button")
-      setCharacterContext(eachCharacter)
-      navigate(`/page${existingSavepoint}`);
-    }
   
-
+  
   useEffect(() => {
-    console.log(characterContext, "charactercontext after play");
-  }, [characterContext]);
-
+    fetch(`http://localhost:3000/characters/${eachCharacter.id}/npc_interactions`)
+      .then((resp) => resp.json())
+      .then((eachNPC) => {
+        setNonPlayerContext(eachNPC);
+        console.log(eachNPC, "each npc");
+      });
+  }, [eachCharacter.id, setNonPlayerContext]);
+  
+  // Log the contents of nonPlayerContext
+  useEffect(() => {
+    console.log("Updated nonPlayerContext after play:", nonPlayerContext);
+  }, [nonPlayerContext]);
+  
+  
+      
+      function handlePlay() {
+          const existingSavepoint = eachCharacter.savepoint;
+          console.log(existingSavepoint, "existingsavepoint in play button")
+          setCharacterContext(eachCharacter)
+          navigate(`/page${existingSavepoint}`);
+        }
   return (
     <>
       <li>{eachCharacter.name}</li>

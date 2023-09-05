@@ -4,33 +4,28 @@ import { useNavigate } from "react-router-dom";
 import NPCCard from "./NPCCard";
 import useMenu from "./components/useMenu";
 import Menu from "./components/Menu";
+import { useCharacterContext } from "./contexts/CharacterContext";
 
 function Page4() {
   const [nonPlayerContext] = useNonPlayerContext(); // Use the context
   const navigate = useNavigate();
   const [ menuOpen ] = useMenu();
+  const [characterContext, setCharacterContext] = useCharacterContext()
 
-  // Local state to store fetched NPCs
-  const [fetchedNPCs, setFetchedNPCs] = useState([]);
+  console.log("npc context on pg4*********8", nonPlayerContext)
 
-  useEffect(() => {
-    // Fetch goblin NPC data from the backend
-    fetch('http://localhost:3000/non_playables?name=Goblin') // Remove double quotes around "Goblin"
-      .then(response => response.json())
-      .then(data => {
-        setFetchedNPCs(data); // Store the fetched NPCs in local state
-      })
-      .catch(error => {
-        console.error('Error fetching goblin NPC:', error);
-      });
-  }, []);
+
+  function page2Clicked() {
+    navigate("/page2");
+  }
 
   return (
     <div>
-      {fetchedNPCs.map(npc => (
+      {nonPlayerContext.map((npc) => (
         <div key={npc.id}>
           <NPCCard npc={npc}/>
           <Menu menuOpen={menuOpen}/>
+          <button onClick={page2Clicked}>Page 2</button>
         </div>
       ))}
     </div>

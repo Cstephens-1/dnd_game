@@ -25,16 +25,56 @@ class CharactersController < ApplicationController
     def show 
         character = Character.find_by_id(params[:id])
         if character
-            inventory = character.inventory
-            render json: {
-                character:character,
-                inventory_id: inventory.id
+          inventory = character.inventory
+          npc_interactions = character.non_playables.map do |non_playable|
+            {
+              id: non_playable.id,
+              name: non_playable.name,
+              health: non_playable.health,
+              strength: non_playable.strength,
+              constitution: non_playable.constitution,
+              dexterity: non_playable.dexterity,
+              intelligence: non_playable.intelligence,
+              defense: non_playable.defense,
             }
+          end
+      
+          render json: {
+            character: character,
+            inventory_id: inventory.id,
+            npc_interactions: npc_interactions  # Include NPC interactions
+          }
         else
-            render json: {error: 'Character not found'}, status: :not_found
+          render json: { error: 'Character not found' }, status: :not_found
         end
-    end
+      end
 
+      def npc_interactions
+        character = Character.find_by_id(params[:id])
+        
+        if character
+          npc_interactions = character.non_playables.map do |non_playable|
+            {
+              id: non_playable.id,
+              name: non_playable.name,
+              health: non_playable.health,
+              strength: non_playable.strength,
+              constitution: non_playable.constitution,
+              dexterity: non_playable.dexterity,
+              intelligence: non_playable.intelligence,
+              defense: non_playable.defense,
+            }
+          end
+          
+          render json: npc_interactions
+        else
+          render json: { error: 'Character not found' }, status: :not_found
+        end
+      end
+      
+      
+      
+      
     def update
         character = Character.find(params[:id])
         if character.update(character_params)

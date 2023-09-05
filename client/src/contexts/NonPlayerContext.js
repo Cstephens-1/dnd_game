@@ -1,15 +1,14 @@
-// CharacterContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export const NonPlayerContext = createContext({});
+export const NonPlayerContext = createContext([]);
 export const useNonPlayerContext = () => useContext(NonPlayerContext);
 
 export const NonPlayerProvider = ({ children }) => {
   const nonPlayercontextLocalStorage = localStorage.getItem("nonPlayerContext");
   const [nonPlayerContext, setNonPlayerContext] = useState(
-    nonPlayercontextLocalStorage && nonPlayercontextLocalStorage !== "undefined"
+    nonPlayercontextLocalStorage
       ? JSON.parse(nonPlayercontextLocalStorage)
-      : {}
+      : []
   );
 
   useEffect(() => {
@@ -17,7 +16,7 @@ export const NonPlayerProvider = ({ children }) => {
   }, [nonPlayerContext]);
 
   return (
-    <NonPlayerContext.Provider value={[NonPlayerContext, setNonPlayerContext]}>
+    <NonPlayerContext.Provider value={[nonPlayerContext, setNonPlayerContext]}>
       {children}
     </NonPlayerContext.Provider>
   );

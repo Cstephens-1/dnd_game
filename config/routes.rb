@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :character_npc_interactions
   resources :inventory_items
   resources :inventories
   resources :items
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   resources :characters do 
     resource :inventory, only: [:show]
     post 'add_item/:item_id', to: 'inventories#add_item', as: :add_item
+    get 'npc_interactions', on: :member
 
   end
   resources :users
