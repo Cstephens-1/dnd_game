@@ -8,15 +8,7 @@ function CharacterCard({ eachCharacter }) {
   const navigate = useNavigate();
   const [characterContext, setCharacterContext] = useCharacterContext();
   const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext()
-  const goblin = nonPlayerContext.filter((npc)=>npc.name==="Goblin" || npc.name === "goblin")
 
-  if(goblin){
-    nonPlayerContext.currentEnemy = goblin
-  }else{
-    setNonPlayerContext([...nonPlayerContext, goblin])
-  }
-
-  
   
   useEffect(() => {
     fetch(`http://localhost:3000/characters/${eachCharacter.id}/npc_interactions`)

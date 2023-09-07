@@ -12,6 +12,8 @@ import Page3 from './Page3';
 import { InventoryProvider } from './contexts/InventoryContext';
 import { NonPlayerProvider } from './contexts/NonPlayerContext';
 import Page4 from './Page4';
+import Page5 from './Page5';
+import Page6 from './Page6';
 
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
@@ -50,6 +52,9 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
             <Route path="/page2" element={<Page2 />} />
             <Route path="/page3" element={<Page3 />} />
             <Route path="/page4" element={<Page4 />} />
+            <Route path="/page5" element={<Page5 />} />
+            <Route path="/page6" element={<Page6
+             />} />
           </Routes>
         </NonPlayerProvider>
       </InventoryProvider>

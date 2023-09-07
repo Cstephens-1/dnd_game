@@ -21,9 +21,10 @@ item2 = Item.create(name: 'Shield', description: 'A sturdy shield', ability: { d
 
 goblin = NonPlayable.create(name:"Goblin", health:10, strength:7, constitution:4, dexterity:2, intelligence:1, defense: 4, enemy:true)
 vampire = NonPlayable.create(name:"Vampire", health:100, strength:10, constitution:10, dexterity:12, intelligence:12, defense: 4, enemy:true)
+skeleton = NonPlayable.create(name:"Skeleton", health: 20, strength:10, constitution: 5, dexterity:4, intelligence:1, defense: 1, enemy:true )
 
-laderGoblin = CharacterNpcInteraction.create(character_id:5, non_playable_id:goblin.id)
-laderVamp = CharacterNpcInteraction.create(character_id:5, non_playable_id:vampire.id)
+laderGoblin = CharacterNpcInteraction.create(character_id:7, non_playable_id:goblin.id)
+laderVamp = CharacterNpcInteraction.create(character_id:7, non_playable_id:vampire.id)
 
 
 # # Create inventories for characters

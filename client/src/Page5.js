@@ -5,27 +5,25 @@ import NPCCard from "./NPCCard";
 import useMenu from "./components/useMenu";
 import Menu from "./components/Menu";
 import { useCharacterContext } from "./contexts/CharacterContext";
-import DisplayCombatButtons from "./components/DisplayCombatButtons";
-import Persona from "./Persona";
 
-function Page4() {
+function Page5() {
   const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext(); // Use the context
   const navigate = useNavigate();
   const [ menuOpen ] = useMenu();
   const [characterContext, setCharacterContext] = useCharacterContext()
 
-  console.log("npc context on pg4*********8", nonPlayerContext)
+  console.log("npc context on pg5*********8", nonPlayerContext)
 
 
-  const goblin = nonPlayerContext.find((npc)=>npc.name==="Goblin" || npc.name === "goblin")
+  const vampire = nonPlayerContext.find((npc)=>npc.name==="Vampire" || npc.name === "vampire")
 
   
 
   
   useEffect(() => {
-    if (!goblin) {
-      const newGoblin = {
-        name:"Goblin", 
+    if (!vampire) {
+      const newVampire = {
+        name:"Vampire", 
         health:10, 
         strength:7, 
         constitution:4, 
@@ -34,33 +32,30 @@ function Page4() {
         defense: 4, 
         enemy:true
       }
-        // Add the goblin to the context
-        setNonPlayerContext([...nonPlayerContext, newGoblin]);
+        // Add the Vampire to the context
+        setNonPlayerContext([...nonPlayerContext, newVampire]);
       };
-    }, [goblin, nonPlayerContext, setNonPlayerContext]);
+    }, [vampire, nonPlayerContext, setNonPlayerContext]);
 
 
 
-  function page2Clicked() {
-    navigate("/page2");
+  function page3Clicked() {
+    navigate("/page3");
   }
 
-
-  function page5Clicked() {
-    navigate("/page5");
+  function page6Clicked() {
+    navigate("/page6");
   }
 
   return (
     <div>
-          {goblin && <NPCCard npc={goblin}/>}
+          {vampire && <NPCCard npc={vampire}/>}
           <Menu menuOpen={menuOpen}/>
-          <DisplayCombatButtons />
-          <Persona />
-          <button onClick={page2Clicked}>Page 2</button>
-          <button onClick={page5Clicked}>Page 5</button>
+          <button onClick={page3Clicked}>Page 3</button>
+          <button onClick={page6Clicked}>Page 6</button>
     </div>
 
   );
 }
 
-export default Page4;
+export default Page5;
