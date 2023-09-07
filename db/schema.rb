@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_04_195649) do
+ActiveRecord::Schema.define(version: 2023_08_30_200915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "character_npc_interactions", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "non_playable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_character_npc_interactions_on_character_id"
+    t.index ["non_playable_id"], name: "index_character_npc_interactions_on_non_playable_id"
+  end
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -78,6 +87,8 @@ ActiveRecord::Schema.define(version: 2023_08_04_195649) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "character_npc_interactions", "characters"
+  add_foreign_key "character_npc_interactions", "non_playables"
   add_foreign_key "characters", "users"
   add_foreign_key "inventories", "characters"
   add_foreign_key "inventory_items", "inventories"

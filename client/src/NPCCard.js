@@ -5,7 +5,7 @@ function NPCCard({ npc }) {
   const [health, setHealth] = useState(0);
   const [defense, setDefense] = useState(0);
 
-  console.log(npc)
+  console.log("this is the npc in card********************",npc)
 
   useEffect(() => {
     // Calculate health and defense based on NPC attributes
