@@ -5,6 +5,7 @@ import NPCCard from "./NPCCard";
 import useMenu from "./components/useMenu";
 import Menu from "./components/Menu";
 import { useCharacterContext } from "./contexts/CharacterContext";
+import useCharNPCInteractions from "./contexts/useCharNPCInteractions";
 
 function Page5() {
   const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext(); // Use the context
@@ -15,27 +16,27 @@ function Page5() {
   console.log("npc context on pg5*********8", nonPlayerContext)
 
 
-  const vampire = nonPlayerContext.find((npc)=>npc.name==="Vampire" || npc.name === "vampire")
+  const vampire = useCharNPCInteractions(characterContext.id, "Vampire")
 
   
 
   
-  useEffect(() => {
-    if (!vampire) {
-      const newVampire = {
-        name:"Vampire", 
-        health:10, 
-        strength:7, 
-        constitution:4, 
-        dexterity:2, 
-        intelligence:1, 
-        defense: 4, 
-        enemy:true
-      }
-        // Add the Vampire to the context
-        setNonPlayerContext([...nonPlayerContext, newVampire]);
-      };
-    }, [vampire, nonPlayerContext, setNonPlayerContext]);
+  // useEffect(() => {
+  //   if (!vampire) {
+  //     const newVampire = {
+  //       name:"Vampire", 
+  //       health:10, 
+  //       strength:7, 
+  //       constitution:4, 
+  //       dexterity:2, 
+  //       intelligence:1, 
+  //       defense: 4, 
+  //       enemy:true
+  //     }
+  //       // Add the Vampire to the context
+  //       setNonPlayerContext([...nonPlayerContext, newVampire]);
+  //     };
+  //   }, [vampire, nonPlayerContext, setNonPlayerContext]);
 
 
 

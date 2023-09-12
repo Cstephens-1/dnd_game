@@ -11,12 +11,14 @@ export const NonPlayerProvider = ({ children }) => {
       : []
   );
 
+  const [currentEnemy, setCurrentEnemy] = useState(null);
+
   useEffect(() => {
     localStorage.setItem("nonPlayerContext", JSON.stringify(nonPlayerContext));
   }, [nonPlayerContext]);
 
   return (
-    <NonPlayerContext.Provider value={[nonPlayerContext, setNonPlayerContext]}>
+    <NonPlayerContext.Provider value={[nonPlayerContext, setNonPlayerContext, currentEnemy, setCurrentEnemy]}>
       {children}
     </NonPlayerContext.Provider>
   );

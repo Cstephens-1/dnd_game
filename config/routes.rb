@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resource :inventory, only: [:show]
     post 'add_item/:item_id', to: 'inventories#add_item', as: :add_item
     get 'npc_interactions', on: :member
+    post 'npc_interactions', on: :member, to: 'character_npc_interactions#create'
   end
   resources :users
   get "/me", to: "users#show"

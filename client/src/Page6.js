@@ -5,6 +5,7 @@ import NPCCard from "./NPCCard";
 import useMenu from "./components/useMenu";
 import Menu from "./components/Menu";
 import { useCharacterContext } from "./contexts/CharacterContext";
+import useCharNPCInteractions from "./contexts/useCharNPCInteractions";
 
 function Page6() {
   const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext(); // Use the context
@@ -15,28 +16,28 @@ function Page6() {
   console.log("npc context on pg6*********8", nonPlayerContext)
 
 
-  const skeleton = nonPlayerContext.find((npc) => npc.name.toLowerCase() === "skeleton");
+  const skeleton = useCharNPCInteractions(characterContext.id, "Skeleton")
 
-useEffect(() => {
-  if (!skeleton) {
-    // Fetch the skeleton NPC data from the server
-    fetch(`http://localhost:3000/non_playables/Skeleton`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Failed to fetch skeleton NPC data');
-        }
-      })
-      .then((skeletonData) => {
-        // Add the fetched skeleton NPC data to the context
-        setNonPlayerContext([...nonPlayerContext, skeletonData]);
-      })
-      .catch((error) => {
-        console.error('Error fetching skeleton NPC data:', error);
-      });
-  }
-}, [skeleton, nonPlayerContext, setNonPlayerContext]);
+// useEffect(() => {
+//   if (!skeleton) {
+//     // Fetch the skeleton NPC data from the server
+//     fetch(`http://localhost:3000/non_playables/Skeleton`)
+//       .then((response) => {
+//         if (response.ok) {
+//           return response.json();
+//         } else {
+//           throw new Error('Failed to fetch skeleton NPC data');
+//         }
+//       })
+//       .then((skeletonData) => {
+//         // Add the fetched skeleton NPC data to the context
+//         setNonPlayerContext([...nonPlayerContext, skeletonData]);
+//       })
+//       .catch((error) => {
+//         console.error('Error fetching skeleton NPC data:', error);
+//       });
+//   }
+// }, [skeleton, nonPlayerContext, setNonPlayerContext]);
 
 
 

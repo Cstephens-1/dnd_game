@@ -5,46 +5,27 @@ import NPCCard from "./NPCCard";
 import useMenu from "./components/useMenu";
 import Menu from "./components/Menu";
 import { useCharacterContext } from "./contexts/CharacterContext";
-import DisplayCombatButtons from "./components/DisplayCombatButtons";
 import Persona from "./Persona";
+import useCharNPCInteractions from "./contexts/useCharNPCInteractions";
 
 function Page4() {
-  const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext(); // Use the context
+  const [nonPlayerContext, setNonPlayerContext] = useNonPlayerContext();
   const navigate = useNavigate();
-  const [ menuOpen ] = useMenu();
-  const [characterContext, setCharacterContext] = useCharacterContext()
-
-  console.log("npc context on pg4*********8", nonPlayerContext)
-
-
-  const goblin = nonPlayerContext.find((npc)=>npc.name==="Goblin" || npc.name === "goblin")
-
+  const [menuOpen] = useMenu();
+  const [characterContext, setCharacterContext] = useCharacterContext();
   
+  console.log("npc context on pg4*********8", nonPlayerContext);
+  const goblin = useCharNPCInteractions(characterContext.id, "Goblin")
 
-  
+  console.log(goblin, "Goblin on pg4 using the new hook")
+
   useEffect(() => {
-    if (!goblin) {
-      const newGoblin = {
-        name:"Goblin", 
-        health:10, 
-        strength:7, 
-        constitution:4, 
-        dexterity:2, 
-        intelligence:1, 
-        defense: 4, 
-        enemy:true
-      }
-        // Add the goblin to the context
-        setNonPlayerContext([...nonPlayerContext, newGoblin]);
-      };
-    }, [goblin, nonPlayerContext, setNonPlayerContext]);
-
-
+    console.log("character:", characterContext.name, "currentEnemy:", goblin ? goblin.name : "None");
+  }, [characterContext, goblin]);
 
   function page2Clicked() {
     navigate("/page2");
   }
-
 
   function page5Clicked() {
     navigate("/page5");
@@ -52,15 +33,13 @@ function Page4() {
 
   return (
     <div>
-          {goblin && <NPCCard npc={goblin}/>}
-          <Menu menuOpen={menuOpen}/>
-          <DisplayCombatButtons />
-          <Persona />
-          <button onClick={page2Clicked}>Page 2</button>
-          <button onClick={page5Clicked}>Page 5</button>
+      {goblin && <NPCCard npc={goblin} />}
+      <Menu menuOpen={menuOpen} />
+      <Persona />
+      <button onClick={page2Clicked}>Page 2</button>
+      <button onClick={page5Clicked}>Page 5</button>
     </div>
-
   );
 }
 
-export default Page4;
+export default Page4
